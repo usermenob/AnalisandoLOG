@@ -1,0 +1,39 @@
+Pessoa 1 — Parsing e Opções 1 e 2
+Responsabilidade central: leitura e estrutura do log
+
+Criar a classe que representa uma linha do log (LogEntry), com todos os atributos (IP, data, método, recurso, status, tamanho, user agent, referer)
+Criar o parser que lê o arquivo access.log e transforma cada linha em um objeto LogEntry
+Implementar a Opção 1 — recursosGrandes.txt (filtro por status 200–299 e tamanho > 2000)
+Implementar a Opção 2 — naoRespondidosNovembro.txt (filtro por status 400–499 e mês/ano novembro/2021)
+
+Essa pessoa fica com a base de tudo, pois as outras dependem do parser funcionando.
+
+Pessoa 2 — Análise e Opções 3 e 4
+Responsabilidade central: análise dos dados
+
+Implementar a Opção 3 — sistemasOperacionais.txt (leitura do user agent, classificação por SO: Windows, Macintosh, Ubuntu, Fedora, Mobile/Android, X11/outros Linux, e cálculo dos percentuais para 2021)
+Implementar a Opção 4 — média dos tamanhos das requisições POST com sucesso em 2021 (impressão no terminal)
+Criar a classe utilitária de escrita de arquivos na pasta Análise (usada por todos), garantindo compatibilidade de SO com File.separator ou Path
+
+Pessoa 3 — Menu e Integração
+Responsabilidade central: ponto de entrada do programa
+
+Implementar a classe Main com o menu interativo (opções 0–4)
+Chamar os métodos das Pessoas 1 e 2 a partir do menu
+Garantir tratamento de erros de entrada do usuário (opção inválida, arquivo não encontrado)
+Integrar tudo e testar o fluxo completo com o arquivo de 1 milhão de registros
+Coordenar o projeto Maven (estrutura de pastas, pom.xml, geração do site com mvn site)
+
+Classes essenciais
+1. LogEntry
+Representa uma linha do log. Atributos: IP, data/hora, método HTTP, recurso, status, tamanho, referer, user agent.
+2. LogParser
+Responsável por ler o arquivo .log e transformar cada linha em um objeto LogEntry. Provavelmente usa Regex ou split para quebrar a linha.
+3. LogAnalyzer
+Concentra a lógica de análise — os filtros e cálculos das opções 1, 2, 3 e 4. Recebe uma lista de LogEntry e devolve os resultados.
+4. FileWriter (ou RelatorioWriter)
+Responsável por escrever os arquivos de saída na pasta Análise, de forma compatível com qualquer SO.
+5. Menu
+Exibe as opções, lê a entrada do usuário e chama os métodos correspondentes.
+6. Main
+Ponto de entrada. Instancia as classes, carrega o arquivo e inicia o menu.
