@@ -26,14 +26,24 @@ Coordenar o projeto Maven (estrutura de pastas, pom.xml, geração do site com m
 
 Classes essenciais
 1. LogEntry
-Representa uma linha do log. Atributos: IP, data/hora, método HTTP, recurso, status, tamanho, referer, user agent.
+Representa uma linha do log. 
+Atributos: IP, data/hora, método HTTP, recurso, status, tamanho, referer, user agent.
+
 2. LogParser
 Responsável por ler o arquivo .log e transformar cada linha em um objeto LogEntry. Provavelmente usa Regex ou split para quebrar a linha.
+Atributos: +Linha
+Métodos: +SepararLog();
+
 3. LogAnalyzer
 Concentra a lógica de análise — os filtros e cálculos das opções 1, 2, 3 e 4. Recebe uma lista de LogEntry e devolve os resultados.
+
 4. FileWriter (ou RelatorioWriter)
 Responsável por escrever os arquivos de saída na pasta Análise, de forma compatível com qualquer SO.
 5. Menu
 Exibe as opções, lê a entrada do usuário e chama os métodos correspondentes.
 6. Main
 Ponto de entrada. Instancia as classes, carrega o arquivo e inicia o menu.
+
+7. LogChunk
+Divide o arquivo em bytes. 
+Atributos: +arquivo; 
