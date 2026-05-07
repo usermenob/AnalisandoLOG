@@ -20,7 +20,7 @@ public class LogAnalyzer {
         List<LogEntry> resultado = new ArrayList<>();
         for (LogEntry entrada : entradas) {
             //se foi respondida com sucesso (200-299) e tem tamanho > 2000, entao adiciona na lista de resultado   
-            if (entrada.getCodigoResposta() >= 200 && entrada.getCodigoResposta() <= 299
+            if (entrada.getRespostaHTTP() >= 200 && entrada.getRespostaHTTP() <= 299
                     && entrada.getTamanho() > 2000) {
                 resultado.add(entrada);
             }
@@ -34,9 +34,9 @@ public class LogAnalyzer {
         List<LogEntry> resultado = new ArrayList<>();
         for (LogEntry entrada : entradas) {
             //se tem o codigo de resposta entre 400 e 499, e a data é de novembro de 2021, entao adiciona na lista de resultado
-            if (entrada.getCodigoResposta() >= 400 && entrada.getCodigoResposta() <= 499
-                    && entrada.getDataHora().getMonth() == Nov
-                    && entrada.getDataHora().getYear() == 2021) {
+            if (entrada.getRespostaHTTP() >= 400 && entrada.getRespostaHTTP() <= 499
+                    && entrada.getDataAcesso().getMonth().equals("Nov")
+                    && entrada.getDataAcesso().getYear() == 2021) {
                 resultado.add(entrada);
             }
         }
@@ -58,8 +58,8 @@ public class LogAnalyzer {
         for (LogEntry entrada : entradas) {
             //vai filtrar por POST, sucesso e ano 2021
             if (entrada.getTipoRequisicao().equals("POST")
-                    && entrada.getCodigoResposta() >= 200 && entrada.getCodigoResposta() <= 299
-                    && entrada.getDataHora().getYear() == 2021) {
+                    && entrada.getRespostaHTTP() >= 200 && entrada.getRespostaHTTP() <= 299
+                    && entrada.getDataAcesso().getYear() == 2021) {
                 soma += entrada.getTamanho();
                 count++;
             }

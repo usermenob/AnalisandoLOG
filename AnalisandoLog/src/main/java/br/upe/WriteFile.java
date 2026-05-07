@@ -34,7 +34,7 @@ public class WriteFile {
             for (LogEntry entrada : entradas) {
                 // escreve uma linha no formato: "200 32653 13.66.139.0"
                 // conforme o exemplo do PDF
-                bw.write(entrada.getCodigoResposta() + " " + entrada.getTamanho() + " " + entrada.getIp());
+                bw.write(entrada.getRespostaHTTP() + " " + entrada.getTamanho() + " " + entrada.getIp());
                 bw.newLine(); // quebra de linha compatível com qualquer SO (\n ou \r\n)
             }
             System.out.println("recursosGrandes.txt salvo");
@@ -56,7 +56,7 @@ public class WriteFile {
                 // escreve no formato: 404 "http://www.almhuette-raith.at" Nov/2021
                 // conforme o exemplo do PDF
                 // as aspas ao redor da URL são escapadas com \"
-                bw.write(entrada.getCodigoResposta() + " \"" + entrada.getEnderecoReferencia() + "\" Nov/2021");
+                bw.write(entrada.getRespostaHTTP() + " \"" + entrada.getEnderecoReferencia() + "\" Nov/2021");
                 bw.newLine();
             }
             System.out.println("naoRespondidosNovembro.txt salvo");
