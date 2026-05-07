@@ -12,7 +12,7 @@ public class LogParser{
 	
 	//método contrutor que compila o Pattern a partir do padrão
 	public LogParser() {
-		this.padraoRegex = Pattern.compile("(\\S+) \\S+ \\S+ \\[(\\d{2}/\\w{3}/\\d{4}):[^\\]]+\\] \"(\\w+) (\\S+) \\S+\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"");
+		this.padraoRegex = Pattern.compile("(\\S+) \\S+ \\S+ \\[(\\d{2}/\\w{3}/\\d{4}):[^\\]]+\\] \"(\\w+) (\\S+) \\S+\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\" \"[^\"]*\"");
 	}
 	
 	//método para separar cada termo
