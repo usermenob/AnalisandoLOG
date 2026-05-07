@@ -1,3 +1,4 @@
+/target/
 # Eclipse
 .project
 .classpath
@@ -7,6 +8,17 @@ bin/
 *.launch
 RemoteSystemsTempFiles/
 
+# Ignorar a pasta de build do Maven (onde ficam os .class, o .jar e o site)
+target/
+
+# Ignorar arquivos e pastas de configuração locais do Eclipse
+.settings/
+.project
+.classpath
+bin/
+
+# Ignorar arquivos de log temporários
+*.log
 # VS Code
 .vscode/
-*.code-workspace//add os ignores de cada um aqui. qualquer coisa pesquisar
+*.code-workspace
