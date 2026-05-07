@@ -23,10 +23,6 @@ public class Main {
         // instancia o escritor de arquivos
         WriteFile escritor = new WriteFile();
 
-        LogParser parser = new LogParser();
-        LogEntry teste = parser.parsearLinha("sua linha aqui");
-        System.out.println(teste);
-
         // instancia e exibe o menu em loop até o usuário digitar 0
         Menu menu = new Menu(analiser, escritor);
         menu.exibir();
