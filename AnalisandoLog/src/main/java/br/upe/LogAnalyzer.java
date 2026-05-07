@@ -46,10 +46,63 @@ public class LogAnalyzer {
 
     // Opção 3 vai calcular o percentual de acessos por sistema operacional em 2021
     public Map<String, Double> sistemasOperacionais() {
-        // implementar depois
-        //vai retornar um map onde a chave é o nome do sistema operacional e o valor é o percentual de acessos daquele sistema em 2021
-        return new HashMap<>();
-    }
+        Map<String, Integer> contagem = new HashMap<>();
+
+        // inicializa todos os SOs com 0 para garantir que aparecem no arquivo mesmo com 0 acessos
+        contagem.put("Windows", 0);
+        contagem.put("Macintosh", 0);
+        contagem.put("Ubuntu", 0);
+        contagem.put("Fedora", 0);
+        contagem.put("Mobile", 0);
+        contagem.put("Linux, outros", 0);
+
+        int total = 0; // total de acessos em 2021 para calcular o percentual
+
+        for (LogEntry entrada : entradas) {
+
+            if (entrada.getDataAcesso().getYear() != 2021) {
+                continue;
+            }
+
+            total++;
+            String agente = entrada.getUserAgent();
+
+            // Android e Mobile primeiro
+            if (agente.contains("Android") || agente.contains("Mobile")) {
+                contagem.merge("Mobile", 1, Integer::sum);
+
+            } else if (agente.contains("Windows")) {
+                contagem.merge("Windows", 1, Integer::sum);
+
+            } else if (agente.contains("Macintosh")) {
+                contagem.merge("Macintosh", 1, Integer::sum);
+
+            } else if (agente.contains("Ubuntu")) {
+                contagem.merge("Ubuntu", 1, Integer::sum);
+
+            } else if (agente.contains("Fedora")) {
+                contagem.merge("Fedora", 1, Integer::sum);
+
+            // X11 é o identificador de Linux genérico no user agent 
+            } else if (agente.contains("X11")) {
+                contagem.merge("Linux, outros", 1, Integer::sum);
+            }
+        }
+
+        // converte a contagem para percentual
+        Map<String, Double> percentuais = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : contagem.entrySet()) {
+            if (total == 0) {
+                percentuais.put(entry.getKey(), 0.0);
+            } else {
+                // divide a contagem pelo total e multiplica por 100 para obter o percentual
+                double percentual = (entry.getValue() * 100.0) / total;
+                percentuais.put(entry.getKey(), percentual);
+            }
+        }
+
+        return percentuais;
+}
 
     // Opção 4 calcula a media de tamanho das requisicoes POST respondidas com sucesso em 2021
     public double mediaPOST() {

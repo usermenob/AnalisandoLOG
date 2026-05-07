@@ -56,7 +56,7 @@ public class WriteFile {
                 // escreve no formato: 404 "http://www.almhuette-raith.at" Nov/2021
                 // conforme o exemplo do PDF
                 // as aspas ao redor da URL são escapadas com \"
-                bw.write(entrada.getRespostaHTTP() + " \"" + entrada.getEnderecoReferencia() + "\" Nov/2021");
+                bw.write(entrada.getRespostaHTTP() + " \"" + entrada.getEnderecoRecurso() + "\" Nov/2021");
                 bw.newLine();
             }
             System.out.println("naoRespondidosNovembro.txt salvo");

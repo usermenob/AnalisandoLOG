@@ -24,7 +24,7 @@ public class Menu {
             System.out.println("4 - Média das requisições POST");
             System.out.println("0 - Sair");
 
-            opcao = scanner.nextInt();
+            opcao = Integer.parseInt(scanner.nextLine().trim()); // lê a opção do usuário e remove espaços em branco
 
             executarOpcao(opcao);
 
