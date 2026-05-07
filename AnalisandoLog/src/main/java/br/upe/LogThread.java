@@ -1,5 +1,6 @@
 package br.upe;
 
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class LogThread extends Thread{
@@ -12,8 +13,8 @@ public class LogThread extends Thread{
 	private final long byteInicio;
 	//Esse atributo é o último byte a ser lido
 	private final long byteFim;
-	//Esse atributo é referente ao numero de threads para a leitura
-	private final int numThreads;
+	//Esse atributo é referente ao numero de thread que vai ler
+	private final int numThread;
 	//Esse atributo é a lista criada em LogEntryBuffer, que garante que não tenha a lista não perca informações
 	private final LogEntryBuffer buffer;
 	//Esse atributo é referente a divisão de cada linha para ser parseada e assim montarmos os atributos de LogEntry;
@@ -24,7 +25,7 @@ public class LogThread extends Thread{
 		this.caminhoArquivo = caminhoArquivo;
 		this.byteInicio = byteInicio;
 		this.byteFim = byteFim;
-		this.numThreads = numThreads;
+		this.numThread = numThreads;
 		this.buffer = buffer;
 		this.parser = parser;
 	}
@@ -48,9 +49,22 @@ public class LogThread extends Thread{
 			
 			// Aqui a thread lê linha por linha de acordo com o número de bytes determinado e garante que
 			// a última linha seja lida por completo, mesmo se a quantidade de bytes passar.
-			while (arquivo.getFilePointer() <= byteFim && (linha = raf.readLine()) != null) {
-				
+			String linha;
+			while (arquivo.getFilePointer() <= byteFim && (linha = arquivo.readLine()) != null) {
+				processarLinha(linha);
 			}
+			arquivo.close();
+		//O catch capitura os erros de inicialização das threads e imprime a mensagem personalizada
+		} catch (IOException e) {
+			System.out.println("Erro na thread " + numThread + ": " + e.getMessage());
+		}	
+	}
+	//Esse método recebe como parametro a linha lida de cada thread e faz parseamento da linha
+	// chamando o método parsearLinha dentro da classe LogParser
+	private void processarLinha(String linha) {
+		LogEntry entrada = parser.parsearLinha(linha);
+		if (entrada != null) {
+			buffer.adicionar(entrada);
 		}
 	}
 }
