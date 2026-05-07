@@ -1,1 +1,13 @@
 /target/
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+.metadata/
+*.launch
+RemoteSystemsTempFiles/
+
+# VS Code
+.vscode/
+*.code-workspace//add os ignores de cada um aqui. qualquer coisa pesquisar
