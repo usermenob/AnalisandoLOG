@@ -54,7 +54,7 @@ public class LogThread extends Thread{
 				processarLinha(linha);
 			}
 			arquivo.close();
-		//O catch capitura os erros de inicialização das threads e imprime a mensagem personalizada
+		//O catch capitura os erros de leitura de arquivo
 		} catch (IOException e) {
 			System.out.println("Erro na thread " + numThread + ": " + e.getMessage());
 		}	
