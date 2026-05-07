@@ -35,7 +35,7 @@ public class LogAnalyzer {
         for (LogEntry entrada : entradas) {
             //se tem o codigo de resposta entre 400 e 499, e a data é de novembro de 2021, entao adiciona na lista de resultado
             if (entrada.getRespostaHTTP() >= 400 && entrada.getRespostaHTTP() <= 499
-                    && entrada.getDataAcesso().getMonth().equals("Nov")
+                    && entrada.getDataAcesso().getMonthValue() == 11
                     && entrada.getDataAcesso().getYear() == 2021) {
                 resultado.add(entrada);
             }

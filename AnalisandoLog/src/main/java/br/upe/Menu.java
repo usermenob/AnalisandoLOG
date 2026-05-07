@@ -15,7 +15,7 @@ public class Menu {
     }
 
     public void exibir() {
-        int opcao; // não precisa mais inicializar com -1
+        int opcao; 
 
         do {
             System.out.println("1 - Recursos grandes respondidos");
